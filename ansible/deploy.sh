@@ -1,0 +1,1 @@
+ansible-playbook playbooks/deploy_app.yml -i inventory/hosts -vvv

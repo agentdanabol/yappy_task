@@ -1,0 +1,13 @@
+galaxy_info:
+  author: Danil
+  description: Роль для деплоя приложения через Docker Compose
+  company: Yappy
+  license: license (MIT)
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name
+
+dependencies: []

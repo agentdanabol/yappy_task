@@ -1,0 +1,7 @@
+---
+- name: Деплой приложения с помощью Docker Compose
+  hosts: yappy_hosts
+#  become: true
+
+  roles:
+    - role: ../roles/deploy_docker_compose
