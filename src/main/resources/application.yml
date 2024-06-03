@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: yappy
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled:
+        true
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true

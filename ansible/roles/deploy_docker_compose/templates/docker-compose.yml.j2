@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+
+  yappy-app:
+    platform: linux/x86_64
+    image: "{{ app_image }}"
+    container_name: yappy-app
+    ports:
+      - "{{ app_port }}:8080"
+    restart: on-failure
+    networks:
+      - yappy-network
+
+  prometheus:
+    image: "{{ prometheus_image }}"
+    container_name: yappy-prometheus
+    hostname: prometheus
+    ports:
+      - "{{ prometheus_port }}:9092"
+    restart: unless-stopped
+    environment:
+      TZ: "Europe/Moscow"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+      - '--web.listen-address=:{{ prometheus_port }}'
+    networks:
+      - yappy-network
+
+  grafana:
+    image: "{{ grafana_image }}"
+    container_name: yappy-grafana
+    ports:
+      - "{{ grafana_port }}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER={{ grafana_user }}
+      - GF_SECURITY_ADMIN_PASSWORD={{ grafana_password }}
+    volumes:
+      - ./monitoring/grafana/provisioning/:/etc/grafana/provisioning/
+    depends_on:
+      prometheus:
+        condition: service_started
+    networks:
+      - yappy-network
+
+  node-exporter:
+    image: "{{ node_exporter_image }}"
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - "{{ node_exporter_port }}"
+    networks:
+      - yappy-network
+
+networks:
+  yappy-network:
+    name: yappy-network

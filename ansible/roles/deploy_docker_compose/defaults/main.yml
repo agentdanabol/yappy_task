@@ -1,0 +1,13 @@
+app_image: agentdanabol/yappy:latest
+app_port: 8080
+
+prometheus_image: prom/prometheus:v2.52.0
+prometheus_port: 9092
+
+grafana_image: grafana/grafana:10.4.2
+grafana_port: 3001
+grafana_user: admin
+grafana_password: admin
+
+node_exporter_image: prom/node-exporter:latest
+node_exporter_port: 9100
