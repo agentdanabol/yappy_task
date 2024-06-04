@@ -1,4 +1,4 @@
-[yappy_hosts]
-yappy_1 ansible_connection=local ansbile_host=localhost
-#yappy_2 ansible_connection=local ansbile_host=localhost
-#yappy_3 ansible_connection=local ansbile_host=localhost
+[yappy]
+yappy_1 ansible_connection=ssh ansible_host=51.145.25.164 ansible_user=yappy
+#yappy_2 ansible_connection=local ansible_host=localhost
+#yappy_3 ansible_connection=local ansible_host=localhost

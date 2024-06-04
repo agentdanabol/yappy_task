@@ -1,13 +1,13 @@
 - name: Создание каталога для приложения
   file:
-    path: /opt/yappy
+    path: '{{ install_dir }}'
     state: directory
 
 - name: Копирование docker-compose.yml в каталог приложения
   template:
     src: docker-compose.yml.j2
-    dest: /opt/yappy/docker-compose.yml
+    dest: '{{ install_dir }}/docker-compose.yml'
 
 - name: Запуск приложения с помощью docker-compose
   docker_compose:
-    project_src: /opt/yappy
+    project_src: '{{ install_dir }}'

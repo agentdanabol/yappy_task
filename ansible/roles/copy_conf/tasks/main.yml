@@ -1,0 +1,9 @@
+- name: Создание каталога для приложения
+  file:
+    path: '{{ install_dir }}'
+    state: directory
+
+- name: Копирование конфига в каталог приложения
+  copy:
+    src: '{{ conf_path }}'
+    dest: '{{ install_dir }}'
