@@ -1,7 +1,14 @@
 ---
+- name: Копирование конфига для мониторинга
+  hosts: yappy
+  become: true
+
+  roles:
+    - role: ../roles/copy_conf
+
 - name: Деплой приложения с помощью Docker Compose
-  hosts: yappy_hosts
-#  become: true
+  hosts: yappy
+  become: true
 
   roles:
     - role: ../roles/deploy_docker_compose

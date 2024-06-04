@@ -1,13 +1,14 @@
 install_dir: /opt/yappy
+conf_path: /Users/danilsheiko/projects/yappy/monitoring
 
 app_image: agentdanabol/yappy:latest
-app_port: 8080
+app_port: 8081
 
 prometheus_image: prom/prometheus:v2.52.0
-prometheus_port: 9092
+prometheus_port: 9093
 
 grafana_image: grafana/grafana:10.4.2
-grafana_port: 3001
+grafana_port: 3002
 grafana_user: admin
 grafana_password: admin
 
